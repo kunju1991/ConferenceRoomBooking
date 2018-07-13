@@ -1,0 +1,193 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	controllerName="ConferenceRoom.view.S1" xmlns:html="http://www.w3.org/1999/xhtml">
+<Page title="{i18n>appTitle}" id="pageId" showSubHeader="false"
+		showNavButton="false" navButtonPress="navPress">
+<content>
+<!-- <Panel visible="true" id="userPanel" class="panelStyle" expandable="false" expanded="False" headerText="" width="auto">
+	<f:SimpleForm visible="true" id="iduserdtlform" editable="false" layout="ResponsiveGridLayout" title="User Details" 
+	labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" 
+	emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" 
+	singleContainerFullSize="false">
+		<f:content>
+			<Label id="idlabeldtl" text="User Name"/>
+			<Text id="idtxtdtl" text=""/>
+			<Label id="idlabelusrid" text="User Id"/>
+			<Text id="idtxtusrid" text=""/>
+		</f:content>
+	</f:SimpleForm>
+</Panel> -->
+
+<IconTabBar id="iconTabBar" select="handleIconTabBarSelect">
+	<items>
+	<IconTabFilter icon="sap-icon://personnel-view" iconColor="Positive" count="" 
+			text="i18n>New Reservation" key="NewReservation" tooltip="New Reservation">
+	<content>
+		<Panel id="NewreservPanel" class="panelStyle" expandable="false" expanded="False" headerText="" width="auto">
+			<f:SimpleForm 
+			id="idnewresform" 
+			labelMinWidth="192" 
+			adjustLabelSpan="true" 
+			maxContainerCols="2" 
+			class="titleAdjust"
+			editable="true" 
+			layout="ResponsiveGridLayout" 
+			title="" 
+			emptySpanXL="0" 
+			emptySpanL="0" 
+			emptySpanM="0" 
+			emptySpanS="0"
+			columnsXL="3" 
+			columnsL="2" 
+			columnsM="2" 
+			singleContainerFullSize="false">
+						<f:content>
+						
+						<core:Title/>
+						<Label id="idlblusr" text="User Id" />
+						<Text id="idinptusr" text="FIORI_ADMIN" width="100%"/>
+						<Label id="idlbltitle" text="Title"/>
+						<Input id="idinpttitle" liveChange="validate" placeholder="Enter Title ..." width="100%" required="true"/>												
+						<Label id="idlbldes" text="Description"/>
+						<Input id="idinptdes" placeholder="Enter Description ..." width="100%" required="true"/>
+						<Label id="idlbldate" text="Today's Date"/>
+						<DatePicker id="idcreatedate" valueFormat="yyyy-MM-dd" displayFormat="long" change="handleChange" required="true"/>
+						<Label id="idlblbookdate" text="Enter booking Date"/>
+						<DatePicker id="idbookdate" valueFormat="yyyy-MM-dd" displayFormat="long" change="handleChange" required="true"/>
+						<Label id="idlblstart" text="Start Time"/>
+						<TimePicker id="idtimestart" width="100%" 	valueFormat="HH:mm:ss"
+						displayFormat="HH:mm:ss" placeholder="Enter Start Time ..." class="sapUiSmallMarginBottom" required="true"/>
+						<Label id="idlblend" text="End Time"/>
+						<TimePicker id="idtimeend" valueFormat="HH:mm:ss"
+						displayFormat="HH:mm:ss" width="100%" placeholder="Enter End Time ..." class="sapUiSmallMarginBottom" required="true"/>
+						
+						<core:Title/>
+						<Label />
+						<Text />
+						<Label id="idlbllocation" text="Location" required="true"/>
+						<Select id="idlocationselect" change="onLocationSelect"
+						forceSelection="true" items="{localModel>/LocationsData}">
+							<core:Item key="{localModel>Location}" text="{localModel>Location}"/>
+						</Select>
+						<Label id="idlblbuilding" text="Building" required="true"/>
+						<Select enabled="false" id="idBuildingselect" change="onBuildingSelect"
+						forceSelection="true" items="{localModel>/BuildingData}">
+							<core:Item key="{localModel>Building}" text="{localModel>Building}"/>
+						</Select>
+						<Label id="idlblroom" text="Conf Rooms" required="true"/>
+						<Select enabled="false" id="idroomselect" change="onroomSelect"
+						forceSelection="true" items="{localModel>/ConfroomData}">
+							<core:Item key="{localModel>Confroom}" text="{localModel>Confroom}"/>
+						</Select>
+						<Label id="idemail" text="Email Id"/>
+						<Input  type="Email" placeholder="Enter Email ..." id="idinputemail" required="true"/>
+						<Label id="idlblphno" text="Contact Number"/>
+						<Input type="Number" placeholder="Enter Contact Number ..." id="idinptpn" required="true"/>
+						<!-- <Label />
+						<Button id="idchkavl" text="Check Availability" press="onPresscheck"/> -->
+						</f:content>
+					</f:SimpleForm>
+			
+			<!-- <f:SimpleForm id="idnewresform" editable="true" layout="ResponsiveGridLayout" title="" 
+				labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" 
+				emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" 
+				columnsM="1" singleContainerFullSize="false">
+					<f:content>
+						<Label id="idlbldate" text="Today's Date"/>
+						<DatePicker id="iddate" displayFormat="short" change="handleChange"/>
+						<Label id="idlblbookdate" text="Enter booking Date"/>
+						<DatePicker id="iddatebook" displayFormat="short" change="handleChange"/>
+						<Label id="idlblstart" text="Start Time"/>
+						<TimePicker id="idtimestart" width="100%" placeholder="Enter Start Time ..." class="sapUiSmallMarginBottom"/>
+						<Label id="idlblend" text="End Time"/>
+						<TimePicker id="idtimeend" width="100%" placeholder="Enter End Time ..." class="sapUiSmallMarginBottom"/>
+						<Label id="idlbllocation" text="Location"/>
+						<Select id="idlocationselect" change="onLocationSelect"
+						forceSelection="true" items="{localModel>/LocationsData}">
+							<core:Item key="{localModel>Location}" text="{localModel>Location}"/>
+						</Select>
+						<Label id="idlblbuilding" text="Building"/>
+						<Select enabled="false" id="idBuildingselect" change="onBuildingSelect"
+						forceSelection="true" items="{ path: 'localModel>/BuildingData',sorter: { path: 'Building' }}">
+							<core:Item key="{localModel>Building}" text="{localModel>Building}"/>
+						</Select>
+						<Label id="idlblroom" text="Conf Rooms"/>
+						<Select enabled="false" id="idroomselect" change="onroomSelect"
+						forceSelection="true" items="{ path: 'localModel>/ConfroomData',sorter: { path: 'Confroom' }}">
+							<core:Item key="{localModel>Confroom}" text="{localModel>Confroom}"/>
+						</Select>
+						<Label id="idemail" text="Email Id"/>
+						<Input id="idinputemail"/>
+					</f:content>
+				</f:SimpleForm> -->
+			</Panel>
+		</content>
+	</IconTabFilter>
+		
+	<IconTabSeparator/>
+		
+	<IconTabFilter icon="sap-icon://compare" iconColor="Critical" text="My Reservation" key="Reservation" tooltip="New Reservation">
+		<content>
+			<Panel width="auto">
+			<Table id="idtable" mode="SingleSelectLeft" items="{/ReservationSet}">
+			<headerToolbar>
+				<Toolbar>
+				<content>
+				<Title text="Current Bookings" level="H2"/>
+				<ToolbarSpacer/>
+				<SearchField width="40%" id="searchId" placeholder="Search by date" search="handleChangeSearch"/>
+			</content>
+			</Toolbar>
+			</headerToolbar>
+				<!-- <infoToolbar>
+					<Toolbar>
+					<SearchField id="searchId" placeholder="Search by date" search="handleChangeSearch"/>
+					<ToolbarSpacer />
+					<Button icon="sap-icon://filter" tooltip="Filter by Date"/>
+					</Toolbar>
+				</infoToolbar> -->
+		<columns>
+			<Column><Text text="Created Date"/></Column>
+			<Column><Text text="BookDate"/></Column>
+			<Column><Text text="Start Time"/></Column>
+			<Column><Text text="End Time"/></Column>
+			<Column><Text text="Location"/></Column>
+			<Column><Text text="Building"/></Column>
+			<Column><Text text="Conf Room"/></Column>
+			<Column><Text text="Email"/></Column>
+		</columns>
+		<items>
+			<ColumnListItem>
+				<cells>
+					<Text text="{Createdate}" wrapping="false"/>
+					<Text text="{Bookdate}" wrapping="false"/>
+					<Text text="{Starttime}" wrapping="false"/>
+					<Text text="{Endtime}" wrapping="false"/>
+					<Text text="{Location}" wrapping="false"/>
+					<Text text="{Building}" wrapping="false"/>
+					<Text text="{Confroom}" wrapping="false"/>
+					<Text text="{Email}" wrapping="false"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+	</Panel>
+	</content>
+	</IconTabFilter>
+	</items>
+	</IconTabBar>
+</content>
+
+<footer>
+	<Toolbar>
+		<ToolbarSpacer/>
+	<!--	<Button icon="sap-icon://add-filter" tooltip="Add Filter" press="FilterbtnPress" type="Accept"/>-->
+			<Button visible="true" type="Accept" id="idcheckbtn" text="Check Availability" press="onPressCheck"/>
+			<Button visible="true" type="Emphasized" id="idbookbtn" text="Book" press="onPressBook"/>
+			<Button visible="false" type="Reject" id="iddeletebtn" text="Delete" press="onPressDelete"/>
+			<Button visible="false" type="Accept" id="idprintbtn" text="Print" press="onPressPrint"/>
+			<Button visible="false" type="Emphasized" id="idmailbtn" text="E-Mail" press="onPressEmail"/>						
+	</Toolbar>
+</footer>
+</Page>
+</core:View>
